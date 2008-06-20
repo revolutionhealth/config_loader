@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name = "config_loader"
   s.version = "2.0.0"
-  s.date = Time.now.strftime("%Y-%m-%d")
+  s.date = "2008-06-20"
   s.summary = "Provides convenience methods for the loading of configuration files"
   s.email = "rails@revolutionhealth.com"
   s.homepage = "http://github.com/revolutionhealth/config_loader"
