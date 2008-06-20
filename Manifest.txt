@@ -1,5 +1,3 @@
-config_loader-2.0.0.gem
-config_loader.gemspec
 LICENSE
 Manifest.txt
 Rakefile
