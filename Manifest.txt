@@ -1,0 +1,15 @@
+config_loader-2.0.0.gem
+config_loader.gemspec
+LICENSE
+Manifest.txt
+Rakefile
+README
+TODO
+lib/config_loader.rb
+lib/service_config.rb
+test/test_config_reload.rb
+test/test_helper.rb
+test/test_service_config.rb
+test/config/database.yml
+test/config/service.yml
+test/config/test_reload.yml

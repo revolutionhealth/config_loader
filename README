@@ -1,0 +1,48 @@
+= Configuration Files Loader
+
+Configuration Files Loader can be used as a gem or a Rails plugin to load various config files.
+
+Finds config file fragments in a Rails config directory and in the config directories of plugins and dependent gems. It then tries to merge them in the following order: gem<-plugin<-application. This allows overrides of global (gem/plugin) configs by individual applications. The supported types for merging are String, Hash, and Array. It caches the content of files by default. ConfigurationLoader is RoR environment aware and provides a shortcut ('load_section') to load a section of a config file corresponding to RAILS_ENV. It is being used in another method provided by ConfigurationLoader - 'load_db_config'. It loads a section from 'config/database.yml' providing a convenient method for placing secondary DB entries in a code as seen here:
+
+establish_connection config_loader.load_db_config['secondary_db']
+
+See the 'DRYing Up Configuration Files' post in our blog http://revolutiononrails.blogspot.com/2007/03/drying-up-configuration-files.html for additional details.
+
+
+= Setup
+
+== Installation
+
+To install Configuration Files Loader as a gem:
+
+Get the gem file from the project page (http://github.com/revolutionhealth/config_loader) and install it
+
+
+= Usage
+
+require 'config_loader'
+
+== ConfigLoader
+
+ConfigLoader.load_db_config # gets the RAILS_ENV section from database.yml
+
+ConfigLoader.load_file('cfg.yml') # loads a YAML-processed config file
+
+ConfigLoader.load_dynamic_file('cfg.yml') # loads a ERB+YAML-processed config file
+
+ConfigLoader.load_section('cfg.yml') # loads a current RAILS_ENV section from a YAML-processed config file
+
+ConfigLoader.load_dynamic_section('cfg.yml', 'test') # loads a 'test' section from a ERB+YAML-processed config file
+
+== ServiceConfig
+
+Assuming you have a file 'config/service.yml' with a 'search' entry for your RAILS_ENV setting
+
+ServiceConfig.endpoint('search') # gets the url of the service
+
+ServiceConfig.timeout('timeout') # gets the timeout of the service
+
+
+= Support
+
+The RubyForge home page is http://github.com/revolutionhealth/config_loader

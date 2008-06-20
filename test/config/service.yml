@@ -1,0 +1,9 @@
+test:
+  search:
+    url: http://www.google.com
+    timeout: 10
+    mocked: false
+    service_backed: true
+    host: google.com
+    path: /search/all
+    port: 80
