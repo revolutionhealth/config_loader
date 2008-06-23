@@ -15,7 +15,11 @@ See the 'DRYing Up Configuration Files' post in our blog http://revolutiononrail
 
 To install Configuration Files Loader as a gem:
 
-Get the gem file from the project page (http://github.com/revolutionhealth/config_loader) and install it
+sudo gem install revolutionhealth-config_loader -s http://gems.github.com
+
+== Source
+
+http://github.com/revolutionhealth/config_loader
 
 
 = Usage
