@@ -45,8 +45,9 @@ require File.join(File.dirname(__FILE__), 'service_config')
 
 class ConfigurationLoader
   
-  def initialize(cache_option = :force_cache)
+  def initialize(cache_option = :force_cache, base_path = nil)
     @caching = (cache_option == :force_cache)
+    @base_path = base_path
   end
   
   def load_file(file, use_env = false)
@@ -187,7 +188,9 @@ private
   end
 
   def app_root
-    [ File.expand_path(RAILS_ROOT) ]
+    raise "Must set base_path if RAILS_ROOT is nil" unless (defined?(RAILS_ROOT) or @base_path)
+    path_to_return = defined?(RAILS_ROOT) ? RAILS_ROOT : @base_path
+    return [ File.expand_path(path_to_return) ]
   end
   
   def load_pathes(pattern)

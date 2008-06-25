@@ -39,7 +39,7 @@ class TestConfigReload < Test::Unit::TestCase
     changed = ConfigLoader.loaded_file_changed_checkonly?
     assert !changed
     
-    sleep 11
+    sleep 5
     ConfigLoader.reset_loader_called
     ## after sleeping it should not reload since the mtime is same
 
@@ -69,7 +69,7 @@ class TestConfigReload < Test::Unit::TestCase
         YAML.dump(loaded, out )
     end
     
-    sleep 11
+    sleep 5
     ConfigLoader.reset_loader_called
     
     changed = ConfigLoader.loaded_file_changed_checkonly?
@@ -100,6 +100,16 @@ class TestConfigReload < Test::Unit::TestCase
     ConfigLoader.loaded_file_changed_checkonly?
     ConfigLoader.instance_eval { loaded_file_changed? }
     ConfigLoader.loaded_file_changed_checkonly?
+  end
+  
+  def test_use_alternate_base_path
+    Object.send(:remove_const, "RAILS_ROOT")
+    assert_raise(RuntimeError) {
+      ConfigurationLoader.new(false).send(:app_root)
+    }
+    top_dir = File.join(File.dirname(__FILE__), '..')
+    conf = ConfigurationLoader.new(false, top_dir)
+    assert conf.send(:app_root).first == File.expand_path(top_dir)
   end
   
 end
