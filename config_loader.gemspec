@@ -7,11 +7,11 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Revolution Health"]
   s.autorequire = %q{config_loader}
-  s.date = %q{2008-06-23}
+  s.date = %q{2008-06-25}
   s.description = %q{Abstracts out the loading of common configuration files such as database.yml dependent on the Rails environment}
   s.email = %q{rails-trunk@revolutionhealth.com}
   s.extra_rdoc_files = ["Manifest.txt", "README"]
-  s.files = ["Manifest.txt", "LICENSE", "README", "TODO", "Rakefile", "lib/config_loader.rb", "lib/service_config.rb", "test/config", "test/config/database.yml", "test/config/service.yml", "test/config/test_reload.yml", "test/test_config_reload.rb", "test/test_helper.rb", "test/test_service_config.rb"]
+  s.files = ["Manifest.txt", "LICENSE", "README", "TODO", "Rakefile", "lib/config_loader.rb", "lib/service_config.rb", "test/config", "test/test_config_reload.rb", "test/test_helper.rb", "test/test_service_config.rb", "test/config/database.yml", "test/config/service.yml", "test/config/test_reload.yml"]
   s.has_rdoc = true
   s.homepage = %q{http://github.com/revolutionhealth/config_loader}
   s.rdoc_options = ["--main", "README"]
