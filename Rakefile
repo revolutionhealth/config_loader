@@ -53,13 +53,15 @@ task :make_spec do
   end
 end
 
+require 'rake/testtask'
 require 'test/unit'
- 
-task :test do
- runner = Test::Unit::AutoRunner.new(true)
- runner.to_run << 'test'
- runner.run
+
+Rake::TestTask.new() do |t|
+  t.libs << 'test'
+  t.pattern = 'test/**/test_*.rb'
+  t.warning = true
+  t.verbose = true
 end
- 
+
 task :default => [:test, :package] do
 end
