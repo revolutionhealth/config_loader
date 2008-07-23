@@ -14,8 +14,7 @@ class TestServiceConfig < Test::Unit::TestCase
                  else 
                    k
                  end
-
-      assert ServiceConfig.send(real_key.to_sym, 'search') == v
+      assert_equal v, ServiceConfig.send(real_key.to_sym, 'search')
     end
   end
 

@@ -27,6 +27,7 @@ end
 class TestConfigReload < Test::Unit::TestCase
   
   def test_config_reload
+    ConfigLoader.instance_eval { @caching = true } # enable caching
     loaded = ConfigLoader.load_file('test_reload.yml')
     assert_not_nil loaded
     assert ConfigLoader.loader_called
@@ -94,6 +95,8 @@ class TestConfigReload < Test::Unit::TestCase
     File.open( test_reload_file, 'w' ) do |out|
       YAML.dump(loaded, out )
     end
+  ensure
+    ConfigLoader.instance_eval { @caching = false } # disable caching
   end
   
   def test_check_only
@@ -103,13 +106,18 @@ class TestConfigReload < Test::Unit::TestCase
   end
   
   def test_use_alternate_base_path
+    orig_rails_root = RAILS_ROOT
     Object.send(:remove_const, "RAILS_ROOT")
-    assert_raise(RuntimeError) {
-      ConfigurationLoader.new(false).send(:app_root)
-    }
-    top_dir = File.join(File.dirname(__FILE__), '..')
-    conf = ConfigurationLoader.new(false, top_dir)
-    assert conf.send(:app_root).first == File.expand_path(top_dir)
+    begin
+      assert_raise(RuntimeError) {
+        ConfigurationLoader.new(false).send(:app_root)
+      }
+      top_dir = File.join(File.dirname(__FILE__), '..')
+      conf = ConfigurationLoader.new(false, top_dir)
+      assert conf.send(:app_root).first == File.expand_path(top_dir)
+    ensure
+      Object.const_set(:RAILS_ROOT, orig_rails_root)
+    end
   end
   
 end

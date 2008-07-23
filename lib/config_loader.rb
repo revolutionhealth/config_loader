@@ -49,8 +49,8 @@ class ConfigurationLoader
     @caching = (cache_option == :force_cache)
     @base_path = base_path
     # defer caching until rails has finished initializing and thus all gems are loaded
-    if cache_option == :defer_cache && Object.const_defined?(:Rails)
-      Rails::configuration.after_initialize do
+    if cache_option == :defer_cache && Object.const_defined?(:Rails) && Rails.respond_to?(:configuration)
+      Rails.configuration.after_initialize do
         self.instance_eval { @caching = true }
       end
     end
