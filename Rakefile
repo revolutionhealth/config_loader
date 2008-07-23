@@ -4,7 +4,7 @@ require 'rubygems/specification'
 require 'date'
 
 GEM = "config_loader"
-GEM_VERSION = "2.0.0"
+GEM_VERSION = "2.0." + `git rev-parse --short HEAD`.to_s.hex.to_s
 AUTHOR = "Revolution Health"
 EMAIL = "rails-trunk@revolutionhealth.com"
 HOMEPAGE = %q{http://github.com/revolutionhealth/config_loader}

@@ -45,9 +45,15 @@ require File.join(File.dirname(__FILE__), 'service_config')
 
 class ConfigurationLoader
   
-  def initialize(cache_option = :force_cache, base_path = nil)
+  def initialize(cache_option = :defer_cache, base_path = nil)
     @caching = (cache_option == :force_cache)
     @base_path = base_path
+    # defer caching until rails has finished initializing and thus all gems are loaded
+    if cache_option == :defer_cache && Object.const_defined?(:Rails)
+      Rails::configuration.after_initialize do
+        self.instance_eval { @caching = true }
+      end
+    end
   end
   
   def load_file(file, use_env = false)
