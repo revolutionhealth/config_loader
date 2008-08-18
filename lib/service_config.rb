@@ -3,7 +3,7 @@ require 'logger'
 module ServiceConfig
   extend self
 
-  ConfigLogger = defined?(RAILS_DEFAULT_LOGGER) ? RAILS_DEFAULT_LOGGER : Logger.new(STDOUT)
+  ConfigLogger = (defined?(RAILS_DEFAULT_LOGGER) ? RAILS_DEFAULT_LOGGER : Logger.new(STDOUT)) unless defined? ConfigLogger
       
   def endpoint(service)
 	  begin
